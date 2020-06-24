@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "consultorio-ayacucho-app": {
+      "hosting": {
+        "consultorio-ayacucho-app": [
+          "consultorio-ayacucho-app"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "consultorio-ayacucho-app"
+  }
+}

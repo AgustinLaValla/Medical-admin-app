@@ -1,0 +1,17 @@
+<mat-card *ngIf="pacient" style="margin: 10px 10px; text-align: center;">
+    <mat-card-content>
+        <h2>Información del paciente</h2>
+        <h3 matLine>Apellido: {{ pacient.apellido }}</h3>
+        <h3 matLine>Nombre: {{ pacient.nombre }}</h3>
+        <h3 matLine>DNI: {{ pacient.id }}</h3>
+        <h3 matLine>Fecha de Nacimiento: {{ pacient.nacimiento | date:'dd LLLL yyyy':'GMT' }}</h3>
+        <h3 matLine>Obra Social: {{ pacient.obra_social }}</h3>
+        <h3 matLine *ngIf="pacient.numero_de_afiliado">Número de Afiliado: {{ pacient.numero_de_afiliado }}</h3>
+        <h3 matLine *ngIf="pacient.telefono">Teléfono: {{ pacient.telefono }}</h3>
+    </mat-card-content>
+
+    <mat-card-actions class="card_actions">
+        <button (click)="openDialog()" mat-raised-button color="primary">Editar Información</button>
+        <button (click)="deletePacient()" mat-raised-button color="warn" style="margin-top: 10px;">Borrar Paciente</button>
+    </mat-card-actions>
+</mat-card>

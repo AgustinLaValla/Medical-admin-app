@@ -1,0 +1,64 @@
+<!------------------------------------------------------ ToolBar  ------------------------------------------------------>
+
+<app-toolbar (opened)="opened = !opened"></app-toolbar>
+<mat-progress-bar *ngIf="showProgressBar" mode="indeterminate" color="warn"></mat-progress-bar>
+<!------------------------------------------------------ SideNav  ------------------------------------------------------>
+<mat-sidenav-container style="-webkit-user-drag: none; -webkit-user-select: none;">
+
+    <mat-sidenav #sidenav [(opened)]="opened" mode="side">
+        <mat-nav-list>
+            <a mat-list-item [routerLink]="['/']">
+                <mat-icon>schedule</mat-icon>
+                <span style="margin-left: 10px;">Turnos</span>
+            </a>
+        </mat-nav-list>
+
+        <mat-divider></mat-divider>
+
+        <mat-nav-list>
+            <a mat-list-item [routerLink]="['/estadisticas']">
+                <mat-icon>insert_chart_outlined</mat-icon>
+                <span style="margin-left: 10px;">Estidísticas y Facturación</span>
+            </a>
+        </mat-nav-list>
+
+        <mat-divider></mat-divider>
+
+        <mat-nav-list>
+            <a mat-list-item [routerLink]="['/stuff']">
+                <mat-icon>group</mat-icon>
+                <span style="margin-left: 10px;">Stuff</span>
+            </a>
+        </mat-nav-list>
+
+        <mat-divider></mat-divider>
+
+        <mat-nav-list>
+            <a mat-list-item [routerLink]="['/especialidades']">
+                <mat-icon>assignment</mat-icon>
+                <span style="margin-left: 10px;">Especialidades</span>
+            </a>
+        </mat-nav-list>
+
+        <mat-nav-list>
+            <a mat-list-item [routerLink]="['/mutuales']">
+                <mat-icon svgIcon="medical_folders"></mat-icon>
+                <span style="margin-left: 10px;">Mutuales</span>
+            </a>
+        </mat-nav-list>
+
+
+        <mat-nav-list>
+            <a mat-list-item (click)="logOut()">
+                <mat-icon svgIcon="logout"></mat-icon>
+                <span style="margin-left: 10px;">Salir</span>
+            </a>
+        </mat-nav-list>
+
+    </mat-sidenav>
+
+    <mat-sidenav-content style="padding-bottom: 50px;">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+
+</mat-sidenav-container>

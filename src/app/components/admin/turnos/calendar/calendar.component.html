@@ -1,0 +1,41 @@
+<full-calendar *ngIf="show && !loading && turnos.length > 0"
+               #calendar 
+               defaultView="dayGridMonth" 
+               [plugins]="calendarPlugins"
+               [weekends]="false"
+               [locale]="es"
+               [header]="{
+                left: 'prev,next',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+              }"
+
+               [slotEventOverlap]=true
+               [slotLabelFormat]="{
+                hour: 'numeric',
+                minute: '2-digit',
+                omitZeroMinute: false,
+                meridiem: 'short'
+              }"
+              [validRange]="{start:getStartRange(), end:getEndRange()}"
+              [minTime]="'08:00:00'"
+              [maxTime]="'21:00:00'"
+              [defaultView]="'timeGridWeek'"
+              [nowIndicator]="true"
+              [slotDuration]="'00:15:00'"
+               [events]="calendarEvents"
+               (eventClick)="openDialog($event)"
+               
+></full-calendar>
+
+<mat-card *ngIf="turnos.length == 0  && miembro && !loading && miembro.genero == 'Masculino'" class="mat-elevation-z8 animated fadeIn">
+  El especialista {{ miembro.apellido }} {{ miembro.nombre }} no tiene turnos asignados.
+</mat-card>
+
+<mat-card *ngIf="turnos.length == 0  && miembro && !loading && miembro.genero == 'Femenino'" class="mat-elevation-z8 animated fadeIn">
+  La especialista {{ miembro.apellido }} {{ miembro.nombre }} no tiene turnos asignados.
+</mat-card>
+
+<div class="container-spinner" *ngIf="loading" >
+  <mat-spinner></mat-spinner>
+</div>

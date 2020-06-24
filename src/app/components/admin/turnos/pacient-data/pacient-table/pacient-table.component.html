@@ -1,0 +1,70 @@
+<div *ngIf="!loading && dataSource.data.length > 0" class="table-container animated fadeIn" #tableScroll scrollable>
+    <div style="position: relative;">
+        <table mat-table [dataSource]="dataSource" style="width: 100%;" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="especialista">
+                <th mat-header-cell *matHeaderCellDef>Especialista</th>
+                <td mat-cell *matCellDef="let element">{{ element.especialista }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="consulta">
+                <th mat-header-cell *matHeaderCellDef>Consulta</th>
+                <td mat-cell *matCellDef="let element">{{ element.consulta }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="fecha">
+                <th mat-header-cell *matHeaderCellDef>Fecha</th>
+                <td mat-cell *matCellDef="let element">{{ element.desde | date:'EE dd MMM' }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="desde">
+                <th mat-header-cell *matHeaderCellDef>Desde</th>
+                <td mat-cell *matCellDef="let element">{{ element.desde | date:'shortTime': 'GMT'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="hasta">
+                <th mat-header-cell *matHeaderCellDef>Hasta</th>
+                <td mat-cell *matCellDef="let element">{{ element.hasta  | date:'shortTime': 'GMT'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="estado">
+                <th mat-header-cell *matHeaderCellDef>Estado</th>
+                <td mat-cell *matCellDef="let element">
+                    <span *ngIf="element.dateInSeconds >= currentDate">Pendiente</span>
+                    <span *ngIf="element.dateInSeconds < currentDate">Concretado</span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="opciones">
+                <th mat-header-cell *matHeaderCellDef>Opciones</th>
+                <td mat-cell *matCellDef="let element">
+                    <button (click)="openDialog('Editar Turno', element)"
+                             [disabled]="element.dateInSeconds < currentDate" 
+                             mat-icon-button 
+                             matTooltip="Editar Turno" 
+                             color="accent"
+                    >
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button (click)="deletePacient(element)" 
+                             mat-icon-button matTooltip="borrar turno" 
+                             color="warn"
+                             [disabled]="element.dateInSeconds < currentDate"          
+                    >
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+</div>
+
+<div class="container-spinner" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+</div>
+
+<mat-card *ngIf="dataSource.data.length == 0 && !loading" class="mat-elevation-z8 animated fadeIn">
+    Al paciente no se le han asignado turnos hasta el momento
+</mat-card>

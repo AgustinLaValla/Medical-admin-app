@@ -1,0 +1,44 @@
+<div class="main-container">
+    <div>
+        <div class="card-container">
+            <mat-card style="text-align: center;">
+                <mat-card-title>
+                    Login
+                </mat-card-title>
+                <mat-card-subtitle>
+                    Login to Awesomeness
+                </mat-card-subtitle>
+                <mat-card-content>
+                    <form #f="ngForm" (ngSubmit)="login(f)">
+                        <mat-form-field class="input-width">
+                            <input matInput placeholder="Email" type="email" name="email" ngModel required
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #email="ngModel">
+                            <mat-error *ngIf="email.hasError('pattern')">
+                                Por favor, ingresar un correo válido
+                            </mat-error>
+                            <mat-error *ngIf="email.hasError('required')">
+                                <strong>Es necesario</strong> ingresar el correo
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="input-width">
+                            <input matInput placeholder="password" type="password" name="password" ngModel
+                                #password="ngModel" required>
+                            <mat-error *ngIf="password.hasError('required')">
+                                La constraseña es <strong>requerida</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <button id="sub_btn" type="submit" mat-raised-button color="primary" [disabled]="!f.valid">
+                            <span *ngIf="!isLoading">Ingresar</span>
+                            <div *ngIf="isLoading" style="display: flex; align-items: center;">
+                                <mat-spinner id="log-spinner" diameter="50" ></mat-spinner>
+                                <span style="width: 50px;"></span>
+                                <span style="font-size: 16px; color: #fff;">cargando...</span>
+                            </div>
+                        </button>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

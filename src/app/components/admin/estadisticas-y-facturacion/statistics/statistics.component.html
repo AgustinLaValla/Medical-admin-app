@@ -1,0 +1,67 @@
+
+<div class="container" *ngIf="show">
+
+    <mat-form-field>
+        <mat-label>Fecha de Inicio</mat-label>
+        <input matInput [matDatepicker]="fromDate" [max]="currentDate" name="from" [(ngModel)]="from"
+            (ngModelChange)="getTurnosFromTo()">
+        <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+        <mat-datepicker #fromDate></mat-datepicker>
+    </mat-form-field>
+
+    &nbsp;
+
+    <mat-form-field>
+        <mat-label>Fecha de Fin</mat-label>
+        <input matInput [matDatepicker]="toDate" name="to" [(ngModel)]="to" (ngModelChange)="getTurnosFromTo()">
+        <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+        <mat-datepicker #toDate></mat-datepicker>
+    </mat-form-field>
+
+    <span *ngIf="turnos.length > 0">Turnos Totales: {{turnos.length}}</span>
+
+    <button (click)="generatePdf()" mat-raised-button color="warn" style="float:right">
+        <mat-icon>add</mat-icon>
+        Generar Reporte de Facturación
+    </button>
+    
+    <app-bar-chart  *ngIf="barChart && turnos.length > 0"
+                    [title]="barChart.title"
+                    [barChartData]="barChart.datasets"
+                    [barChartLabels] ="barChart.labels"
+                    [barChartType]="barChart.type"
+    >
+    </app-bar-chart>
+
+    <div *ngIf="barChart && turnos.length > 0"><br><br></div>
+
+    <app-base-chart *ngIf="baseChart && turnos.length > 0"
+                     [pieChartData]="baseChart.data"
+                     [pieChartLabels]="baseChart.labels"
+                     [pieChartType]="baseChart.type"
+                     [title]="baseChart.title"    
+    >
+        
+    </app-base-chart>
+
+    <div *ngIf="baseChart && turnos.length > 0"><br><br></div>
+
+    <app-doughnut-chart *ngIf="doughnutChart && turnos.length > 0" 
+                        [doughnutChartLabels]="doughnutChart.labels"
+                        [doughnutChartData]="doughnutChart.data" 
+                        [doughnutChartType]="doughnutChart.type" 
+                        [title]="doughnutChart.title"
+
+    >
+    </app-doughnut-chart>
+
+    <mat-card *ngIf="turnos.length == 0  && !loading" class="mat-elevation-z8 animated fadeIn">
+        No hay turnos registrados en la fecha seleccionada.
+    </mat-card>
+
+</div>
+
+
+<!-- <div class="container-spinner" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+</div> -->

@@ -1,0 +1,99 @@
+<div *ngIf=" (data.message == 'Editar Servicios' || data.message == 'Ver Servicios') && !loading ">
+    <mat-list>
+        <h3 mat-dialog-title>{{ data.message }}</h3>
+
+        <mat-dialog-content>
+
+            <div *ngIf="data.message == 'Editar Servicios' " style="display: flex; flex-direction: row;">
+                <mat-form-field style="width: 500px;">
+                    <input matInput 
+                           placeholder="Agregar Servicio"
+                           name="newServicio"
+                           [(ngModel)]="newServicio"
+                           (keyup.enter)="addNewServicio()" 
+                    >
+                </mat-form-field>
+                <button (click)="addNewServicio()" 
+                        mat-raised-button 
+                        color="primary" 
+                        style="margin-left: 75px; height: 40px;">
+                        <mat-icon>done</mat-icon>
+                    Agregar Servicio
+                </button>
+            </div>
+
+           <div *ngIf="especialidad && especialidad.servicios.length > 0" >
+            <mat-list-item *ngFor="let servicio of especialidad.servicios; let i = index">
+                <mat-icon id="icon{{i}}" mat-list-icon svgIcon="stethoscope-medical-tool"></mat-icon>
+                <h4 id="item{{i}}"  mat-line>{{ servicio }}</h4>
+
+                <mat-form-field id="{{i}}" style="display: none;">
+                    <input matLine 
+                           matInput 
+                           autofocus
+                           id="input{{i}}"
+                           value="{{servicio}}" 
+                           name="selectedServicio"
+                           [(ngModel)]="selectedServicio"
+                          (blur)="cancelEditServicio(i)"
+                          (key.esc)="cancelEditServicio(i)"
+                          (keyup.enter)="updateServicio(i)"
+                          >
+                </mat-form-field>
+
+                <button *ngIf="data.message == 'Editar Servicios' " 
+                        (click)="editServicio(i)" 
+                         mat-raised-button
+                         color="accent" 
+                         style="text-align: center;">
+                    <mat-icon matTooltip="Editar Servicio">edit</mat-icon>
+                </button>
+                &nbsp;&nbsp;
+                <button *ngIf="data.message == 'Editar Servicios' " 
+                         (click)="deleteServicio(i)" 
+                         mat-raised-button
+                         color="warn" 
+                         style="text-align: center;">
+                    <mat-icon matTooltip="Eliminar Servicio">delete</mat-icon>
+                </button>
+            </mat-list-item>
+           </div>
+        
+           <mat-card *ngIf="especialidad && especialidad.servicios.length == 0" id="alert-card" class="mat-elevation-z8 animated fadeIn">
+            Aún no se han agreado servicios a la especialidad: {{ especialidad.nombreEspecialidad }}.
+           </mat-card>
+
+        </mat-dialog-content>
+
+
+
+    </mat-list>
+</div>
+
+<div *ngIf="data.message == 'Agregar Especialidad' && !loading ">
+
+    <h3>{{ data.message }}</h3>
+
+    <form>
+
+        <div class="nueva-especialidad-input-container">
+            <mat-form-field style="width: 500px;">
+                <input matInput placeholder="Nombre de la Especialidad" 
+                       name="nombreEspecialidad"
+                       [(ngModel)]="nuevaEspecialidad.nombreEspecialidad"
+                       #nuevaEspecialidadForm="ngModel" 
+                >
+            </mat-form-field>
+
+            <button (click)="addEspecialidad()" mat-raised-button class="add_btn">
+                <mat-icon>add</mat-icon>Agregar
+            </button>
+        </div>
+
+    </form>
+
+</div>
+
+
+<mat-spinner *ngIf="loading">
+</mat-spinner>

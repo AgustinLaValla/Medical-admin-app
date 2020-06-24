@@ -1,0 +1,67 @@
+.main-container {
+    height: auto;
+    /* overflow: hidden; */
+}
+.container { 
+   
+    margin-top: 70px;
+    display: grid;
+    grid-template-columns: 24% 24% 24% 24%;
+    grid-column-gap: 10px;
+    grid-row-gap: 15px;
+    justify-content: center;
+}
+.add_member_btn  {
+    /* float: right; */
+    /* margin-right: 300px; */
+    /* margin-top: 15px; */
+    top: 20px;
+    left: 10px;
+    background-color: #6a0080;
+    color: white;
+    /* position: absolute; */
+}
+
+.spinner-container { 
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#alert-card { 
+    text-align: center;
+    background:rgba(233, 30, 99, 0.7);
+    color: rgba(0, 0, 0, 0.7);
+    font-weight: 400;
+    padding: 15 0px;
+    font-size: 20px;
+    margin-top: 50px;
+    width: 95%;
+    margin: 50px auto 0 auto;
+}
+
+
+@media screen and (min-width: 600px) and (max-width: 959px) {
+    .container { 
+   
+        margin-top: 70px;
+        display: grid;
+        grid-template-columns: 49% 49%;
+        grid-column-gap: 10px;
+        grid-row-gap: 15px;
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 599px) {
+    .container { 
+   
+        margin-top: 70px;
+        display: grid;
+        grid-template-columns: 98%;
+        grid-column-gap: 10px;
+        grid-row-gap: 15px;
+        justify-content: center;
+    }
+}

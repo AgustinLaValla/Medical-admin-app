@@ -1,0 +1,10 @@
+.input-container { 
+    display: inline-block;
+}
+
+.add_btn { 
+    background-color:#6a0080;
+    color:#fff;
+    margin-left: 15px;
+}
+

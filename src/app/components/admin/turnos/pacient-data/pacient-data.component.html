@@ -1,0 +1,13 @@
+<mat-tab-group [(selectedIndex)]="tabIndex" (selectedTabChange)="openTableOrShowPacientData()">
+
+    <mat-tab #tab1 label="Turnos">
+        <ng-template matTabContent>
+            <app-pacient-table *ngIf="openPacientTable"></app-pacient-table>
+        </ng-template>
+    </mat-tab>
+
+    <mat-tab label="Información">
+        <app-pacient-info [pacient]="pacient"></app-pacient-info>
+    </mat-tab>
+
+</mat-tab-group>

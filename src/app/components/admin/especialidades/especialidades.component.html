@@ -1,0 +1,28 @@
+<div *ngIf="!loading" class="container  animated fadeIn">
+    
+    <button (click)="openDialog('Agregar Especialidad')" mat-raised-button class="add_esp_btn">
+        <mat-icon>add</mat-icon> Agregar Especialidad
+    </button>
+    <mat-list *ngIf="especialidades && especialidades.length > 0" style="width: 500px">
+        <h3 mat-subheader>Especialidades</h3>
+        <mat-list-item *ngFor="let especialidad of especialidades" style="cursor: pointer;">
+            <mat-icon mat-list-icon svgIcon="medical_bag"></mat-icon>
+            <h4 (click)="openDialog('Ver Servicios', especialidad.id)" class="list-unit" mat-line matTooltip="Ver servicios">{{ especialidad.nombreEspecialidad }}</h4>
+            <span style="width: 60px"></span>
+            <button (click)="openDialog('Editar Servicios', especialidad.id)" mat-icon-button color="primary" matTooltip="Editar">
+                <mat-icon >edit</mat-icon>
+            </button>
+            &nbsp;&nbsp;
+            <button (click)="deleteEspecialidad(especialidad.id)" mat-icon-button color="warn" matTooltip="Borrar">
+                <mat-icon >delete</mat-icon>
+            </button>
+        </mat-list-item>
+    </mat-list>
+    <mat-card *ngIf="(especialidades && especialidades.length == 0) || !especialidades" id="alert-card" class="mat-elevation-z8 animated fadeIn">
+        Aún no se han agreado especialidades.
+    </mat-card>
+</div>
+
+<div *ngIf="loading" class="spinner-container">
+    <mat-spinner></mat-spinner>
+</div>

@@ -1,0 +1,22 @@
+.nueva-especialidad-input-container { 
+    display: inline-block;
+}
+
+.add_btn { 
+    background-color:#6a0080;
+    color:#fff;
+    margin-left: 15px;
+}
+
+
+#alert-card { 
+    text-align: center;
+    background:rgba(233, 30, 99, 0.7);
+    color: rgba(0, 0, 0, 0.7);
+    font-weight: 400;
+    padding: 15 0px;
+    font-size: 20px;
+    margin-top: 50px;
+    width: 95%;
+    margin: 15px auto 0 auto;
+}

@@ -1,0 +1,33 @@
+<div class="animated fadeIn">
+
+    <div  class="btn_group">
+        <button 
+                 (click)="openDialog('Agregar Turno')"
+                 class="add_member_btn" 
+                 mat-raised-button>
+                <mat-icon>add</mat-icon>
+                Agregar Turno
+        </button>
+    
+        <button mat-raised-button 
+                color="warn" 
+                class="close_btn" 
+                (click)="closeTabs()"
+                matTooltip="Close Table"
+        >       <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+
+</div>
+
+
+<mat-tab-group [(selectedIndex)]="tabIndex" (selectedTabChange)="showTableOrCalendar()">
+    <mat-tab label="Tabla">
+        <app-turnos-table *ngIf="isOpen && tableType === 'Especialistas'"></app-turnos-table>
+    </mat-tab>
+
+    <mat-tab label="Calendario">
+        <app-calendar></app-calendar>
+    </mat-tab>
+</mat-tab-group>

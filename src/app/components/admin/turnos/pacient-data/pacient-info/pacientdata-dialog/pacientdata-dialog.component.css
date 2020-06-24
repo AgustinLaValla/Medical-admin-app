@@ -1,0 +1,20 @@
+/* .container { 
+    padding: 10px;
+    text-align: center;
+} */
+
+form {
+    max-height: 500px;
+    max-width: 600px;
+}
+
+
+.mat-form-field { 
+    min-width: 280px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.input {
+    min-width: 280px;
+}
+

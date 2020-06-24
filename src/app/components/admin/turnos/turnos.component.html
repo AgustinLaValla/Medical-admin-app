@@ -1,0 +1,6 @@
+<div class="container">
+    <app-accordion></app-accordion>
+    <app-turnos-tabs *ngIf="showTurnosData"></app-turnos-tabs>
+    <app-pacient-data *ngIf="showPacientData" style="overflow-y: hidden;"></app-pacient-data>
+    <app-turnos-table *ngIf="isOpen && tableType === 'Turnos Pasados'"></app-turnos-table>
+</div>

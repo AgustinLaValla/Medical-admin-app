@@ -1,0 +1,13 @@
+.mat-sidenav { 
+    width: 200px;
+    cursor: pointer;
+    background-color: #6a0080;
+    position: fixed;
+    top: 63px;
+    z-index: 10;
+}
+
+.mat-nav-list a{
+    margin: 0;
+    color: white;
+}

@@ -1,0 +1,28 @@
+<div *ngIf="!loading" class="container  animated fadeIn">
+    
+    <button (click)="openDialog('Agregar Mutual')" mat-raised-button class="add_esp_btn">
+        <mat-icon>add</mat-icon> Agregar Mutual
+    </button>
+    <mat-list *ngIf="mutuales && mutuales.length > 0" style="width: 500px">
+        <h3 mat-subheader>Mutuales</h3>
+        <mat-list-item *ngFor="let mutual of mutuales" style="cursor: pointer;">
+            <mat-icon mat-list-icon svgIcon="medical_tag"></mat-icon>
+            <h4 class="list-unit" mat-line >{{ mutual.nombre }}</h4>
+            <span style="width: 60px"></span>
+            <button (click)="openDialog('Editar Mutual', mutual)" mat-icon-button color="primary" matTooltip="Editar">
+                <mat-icon >edit</mat-icon>
+            </button>
+            &nbsp;&nbsp;
+            <button (click)="deleteMutual(mutual.id)" mat-icon-button color="warn" matTooltip="Borrar">
+                <mat-icon >delete</mat-icon>
+            </button>
+        </mat-list-item>
+    </mat-list>
+    <mat-card *ngIf="(mutuales && mutuales.length == 0) || !mutuales" id="alert-card" class="mat-elevation-z8 animated fadeIn">
+        Aún no se han agreado mutuales.
+    </mat-card>
+</div>
+
+<div *ngIf="loading" class="spinner-container">
+    <mat-spinner></mat-spinner>
+</div>

@@ -1,0 +1,188 @@
+<div *ngIf="data.action" style="margin-top: 15px;">
+
+    <h3 style="text-align: center;">{{ data.action }}</h3>
+
+    <form #f="ngForm" *ngIf="new_turno">
+        <mat-form-field>
+            <mat-label>Apellido</mat-label>
+            <input matInput name="apellido" [(ngModel)]="new_turno.apellido" required [disabled]="data.action === 'Añadir Diagnóstico'">
+            <mat-error>Este campo es obligatorio</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Nombre</mat-label>
+            <input matInput name="nombre" [(ngModel)]="new_turno.nombre" required [disabled]="data.action === 'Añadir Diagnóstico'">
+            <mat-error>Este campo es obligatorio</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>DNI</mat-label>
+            <input matInput 
+                   name="dni" 
+                   [(ngModel)]="new_turno.dni" 
+                   required 
+                   pattern="[0-9]{8}" 
+                   #dni="ngModel" 
+                   (keyup)="checkDNI(dni.value)"
+                   [disabled]="data.action === 'Añadir Diagnóstico' || data.action === 'Editar Turno'"
+            >
+            <mat-error *ngIf="dni.hasError('required')">Este campo es  obligatorio</mat-error>
+            <mat-error *ngIf="dni.hasError('pattern')">En DNI debe menos 8 carácteres numéricos</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Fecha de nacimiento</mat-label>
+            <input matInput 
+                   [matDatepicker]="nacimientoPicker" 
+                   [max]="maxDate" 
+                   name="nacimiento" 
+                   [(ngModel)]="nacimiento" 
+                   required
+                   [disabled]="data.action === 'Añadir Diagnóstico'"
+            >
+            <mat-datepicker-toggle matSuffix [for]="nacimientoPicker"></mat-datepicker-toggle>
+            <mat-datepicker #nacimientoPicker 
+                            touchUi 
+                            startView="multi-year"
+                            (yearSelected)="chosenYearHandler($event)"
+                            (monthSelected)="chosenMonthHandler($event)"  
+                            panelClass="example-month-picker"
+                            ></mat-datepicker>
+            <mat-error>Este campo es obligatorio</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Fecha de turno</mat-label>
+            <input  matInput 
+                    [matDatepicker]="fechaDeTurno" 
+                    [min]="minDate" 
+                    name="fecha" 
+                    [(ngModel)]="fecha" 
+                    required
+                    [disabled]="data.action === 'Añadir Diagnóstico'"
+            >
+            <mat-error>Este campo es obligatorio</mat-error>
+            <mat-datepicker-toggle matSuffix [for]="fechaDeTurno"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #fechaDeTurno></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Hora de inicio</mat-label>
+            <input type="time" 
+                   matInput 
+                   name="desde_hora" 
+                   [(ngModel)]="desde_hora" 
+                   required 
+                   [disabled]="data.action === 'Añadir Diagnóstico'"
+            >
+            <mat-error>Este campo es obligatorio</mat-error>
+        </mat-form-field>
+        
+        
+        <mat-form-field>
+            <mat-label>Hora de cierre</mat-label>
+            <input type="time" 
+                   matInput 
+                   name="hasta_hora" 
+                   [(ngModel)]="hasta_hora" 
+                   required 
+                   [disabled]="data.action === 'Añadir Diagnóstico'"
+            >
+            <mat-error>Este campo es obligatorio</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Consulta</mat-label>
+            <mat-select [(ngModel)]="new_turno.consulta" 
+                        required 
+                        #servicio="ngModel" 
+                        name="consulta" 
+                        [disabled]="data.action === 'Añadir Diagnóstico'">
+                <mat-option *ngFor="let servicio of servicios" [value]="servicio">{{ servicio }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="servicio.hasError('required')">Este campo es obligatorio</mat-error>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="miembro">
+            <mat-label>Mutual</mat-label>
+            <mat-select [(ngModel)]="new_turno.obra_social" required name="obra_social" [disabled]="data.action === 'Añadir Diagnóstico'">
+                <mat-option *ngFor="let mutual of miembro.mutuales_adheridas" [value]="mutual">{{ mutual }}</mat-option>
+            </mat-select>
+            <mat-error>Este campo es obligatorio</mat-error>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="miembro && new_turno.obra_social !== 'Particular'">
+            <mat-label>Número de Afiliado</mat-label>
+            <input  matInput 
+                    name="numero_de_afiliado" 
+                    [(ngModel)]="new_turno.numero_de_afiliado" 
+                    [disabled]="data.action === 'Añadir Diagnóstico'"
+                    required
+                    
+            >
+            <mat-error>Este campo es obligatorio</mat-error>
+        </mat-form-field>
+
+
+             
+        <mat-form-field>
+            <mat-label>Teléfono</mat-label>
+            <input type="tel" 
+                   matInput 
+                   name="telefono" 
+                   [(ngModel)]="new_turno.telefono" 
+                   name="telefono"
+                   [disabled]="data.action === 'Añadir Diagnóstico'"
+            >
+        </mat-form-field>
+
+        <mat-form-field *ngIf="data.action === 'Añadir Diagnóstico'">
+            <mat-label>Diagnóstico</mat-label>
+            <input type="text" 
+                   matInput 
+                   name="diagnostico" 
+                   [(ngModel)]="diagnostico" 
+                   [disabled]="data.action !== 'Añadir Diagnóstico'"
+                   required
+            >
+        </mat-form-field>
+
+        <button style="width: 100%; margin-top: 15px;" 
+                *ngIf="data.action == 'Agregar Turno' && !loading"
+               (click)="showDetails()"
+                mat-raised-button  
+                color="primary"
+                [disabled]="!f.valid"
+        >       Agendar turno
+        </button>
+
+        <button style="width: 100%; margin-top: 15px;" 
+                *ngIf="data.action == 'Editar Turno' && !loading"
+               (click)="showDetails()"
+                mat-raised-button  
+                color="primary"
+                [disabled]="!f.valid"
+        >       Guardar Cambios
+        </button>
+
+        <button style="width: 100%; margin-top: 15px;" 
+                *ngIf="data.action == 'Añadir Diagnóstico' && !loading"
+               (click)="showDetails()"
+                mat-raised-button  
+                color="primary"
+                [disabled]="!f.valid"
+        >       Añadir Diagnóstico
+        </button>
+
+        <button style="width: 100%; margin-top: 15px;" 
+                *ngIf="loading"
+                (click)="showDetails()"
+                mat-raised-button  
+                color="primary"
+                [disabled]="!f.valid"
+        >       ...CARGANDO DATOS
+        </button>
+
+    </form>
+
+</div>

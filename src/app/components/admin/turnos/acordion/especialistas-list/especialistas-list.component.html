@@ -1,0 +1,12 @@
+<mat-expansion-panel hiddeToggle="true" expanded="false">
+    <mat-expansion-panel-header>{{ headerDescription }}</mat-expansion-panel-header>
+    <mat-spinner *ngIf="loading" ></mat-spinner>
+    <mat-list *ngIf="!loading">
+        <mat-list-item *ngFor="let especialista of stuff" (click)="showTurnos(especialista)" style="cursor: pointer;">
+            <img matListAvatar [src]="especialista.photoURL">
+            <h3 *ngIf="especialista.genero == 'Masculino' " matLine>Dr.{{ especialista.apellido }} {{ especialista.nombre }}</h3>
+            <h3 *ngIf="especialista.genero == 'Femenino' " matLine>Dra.{{ especialista.apellido }} {{ especialista.nombre }}</h3>
+            <p matLine>{{ especialista.especialidad }}</p>
+        </mat-list-item>
+    </mat-list>
+</mat-expansion-panel>

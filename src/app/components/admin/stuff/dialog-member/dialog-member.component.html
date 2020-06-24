@@ -1,0 +1,73 @@
+<div *ngIf="data.action" >
+    <h3 style="text-align: center;">{{ data.action }}</h3>
+    <form #f="ngForm">
+        <mat-form-field>
+            <input matInput
+                   placeholder="Apellido"
+                   name="apellido"
+                   [(ngModel)]="new_miembro.apellido"       
+                   required
+            >
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput
+                   placeholder="Nombre"
+                   name="nombre" 
+                   [(ngModel)]="new_miembro.nombre"
+                   required
+            >
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Especialidad</mat-label>
+            <mat-select name="especialidad" [(ngModel)]="new_miembro.especialidad" required>
+                <mat-option *ngFor="let especialidad of especialidades" 
+                             [value]="especialidad.nombreEspecialidad"
+                             name="especialidad"
+                             
+                >{{ especialidad.nombreEspecialidad }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Mutuales Adheridas</mat-label>
+            <mat-select name="mutuales" [(ngModel)]="new_miembro.mutuales_adheridas" multiple required>
+                <mat-option *ngFor="let mutual of obras_sociales" [value]="mutual">{{ mutual.nombre }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Género</mat-label>
+            <mat-select name="genero" [(ngModel)]="new_miembro.genero" required>
+                <mat-option value="Masculino" 
+                            name="genero" 
+                >           Masculino
+                </mat-option>
+                <mat-option value="Femenino" 
+                            name="genero" 
+                >           Femenino
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <div style="margin-top: 15px;">
+            <button (click)="prolifeImage.click()" mat-raised-button style="width: 100%;" color="accent" [disabled]="loadingImage">
+                <mat-icon *ngIf="!loadingImage && !imageLoaded">cloud_upload</mat-icon>
+                <span *ngIf="!loadingImage && !imageLoaded">Cargar imagen</span>
+                <mat-spinner *ngIf="loadingImage && !imageLoaded" ></mat-spinner>
+                <span *ngIf="loadingImage && !imageLoaded">Cargando...</span> 
+                <mat-icon *ngIf="imageLoaded">check_circle_outline</mat-icon>
+                <span *ngIf="imageLoaded">Imagen cargada correctamente</span>
+            </button>
+            <input hidden 
+                   type="file"
+                   #prolifeImage 
+                   (change)="loadImage($event)"
+            >
+            <button *ngIf="data.action == 'Agregar Miembro' " (click)="addMiembro()" class="add_btn"  mat-raised-button color="primary" [disabled]="!f.valid">Añadir miembro</button>
+            <button *ngIf="data.action == 'Editar Miembro' " (click)="updateMiembro()" class="add_btn"  mat-raised-button color="primary" [disabled]="!f.valid">Guardar Cambios</button>
+        </div>
+    </form>
+</div>
+

@@ -1,0 +1,33 @@
+<div *ngIf="loading" class="spinner-container">
+    <mat-spinner></mat-spinner>
+</div>
+
+
+<div *ngIf="!loading" class="main-container animated fadeIn">
+    <button (click)="openDialog('Agregar Miembro')" class="add_member_btn" mat-raised-button>
+        <mat-icon>add</mat-icon>
+        Agregar miembro
+    </button>
+    <div *ngIf="stuff && stuff.length > 0" class="container">
+        <mat-card class="member-card" *ngFor="let miembro of stuff">
+            <mat-card-header>
+                <mat-card-title *ngIf="miembro.genero == 'Masculino' ">Dr.{{ miembro.apellido }} {{ miembro.nombre }}</mat-card-title>
+                <mat-card-title *ngIf="miembro.genero == 'Femenino' ">Dra.{{ miembro.apellido }} {{ miembro.nombre }}</mat-card-title>
+                <mat-card-subtitle>Especialidad: {{ miembro.especialidad }}</mat-card-subtitle>
+            </mat-card-header>
+            <img *ngIf="miembro.photoURL" mat-card-image [src]="miembro.photoURL">
+            <mat-spinner *ngIf="!miembro.photoURL" style="margin: 0px auto"></mat-spinner>
+            <mat-card-content>
+            </mat-card-content>
+            <mat-card-actions>
+                <button (click)="openDialog('Editar Miembro', miembro.id)" mat-button mat-raised-button color="primary">EDIT</button>
+                <button (click)="deleteMiembro(miembro.id)" mat-button mat-raised-button color="warm">DELETE</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    
+<mat-card id="alert-card" *ngIf="(stuff && stuff.length == 0) || !stuff" class="mat-elevation-z8 animated fadeIn">
+    El Stuff aún no contiene miembros.
+</mat-card>
+</div>
+

@@ -1,0 +1,47 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "turnos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "dni",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "dateInSeconds",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "turnos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "especialistaId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "apellido",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "turnos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "especialistaId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "dateInSeconds",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

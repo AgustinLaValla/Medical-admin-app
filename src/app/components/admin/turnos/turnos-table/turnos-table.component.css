@@ -1,0 +1,63 @@
+.main-container { 
+    margin-bottom: 8px; 
+    margin-left: 8px;
+}
+
+.table-container { 
+    position: relative;
+    max-height: 500px;
+    overflow: auto;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+}
+
+
+.container-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    text-align: center;
+}
+
+.btn_group {
+    float: right;
+    right: 30px; /*50px*/
+} 
+
+.add_member_btn  {
+    background-color: #6a0080;
+    color: white;
+    margin-right: 7.5px;
+}
+
+.close_btn { 
+    margin-left: 7.5px;
+}
+
+.backgrond-layer { 
+    background: rgba(0, 0, 0, 0.15);
+}
+
+
+.table-spinner {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    z-index: 1000 !important;
+    transform: translateY(-200px);
+}
+
+.mat-card { 
+    text-align: center;
+    background:rgba(233, 30, 99, 0.7);
+    color: rgba(0, 0, 0, 0.7);
+    font-weight: 400;
+    padding: 15 0px;
+    font-size: 20px;
+    margin-top: 10px;
+}

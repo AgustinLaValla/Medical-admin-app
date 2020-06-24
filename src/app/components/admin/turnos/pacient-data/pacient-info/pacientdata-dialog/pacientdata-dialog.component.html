@@ -1,0 +1,78 @@
+<div *ngIf="pacient" class="container">
+
+    <h3>Editar información</h3>
+
+    <form autocomplete="off" #pacientForm="ngForm">
+        <mat-form-field>
+            <mat-label>Apellido</mat-label>
+            <input matInput 
+                   name="apellido"
+                   [(ngModel)]="pacient.apellido"
+                   required
+            >
+        </mat-form-field>
+    
+        <mat-form-field>
+            <mat-label>Nombre</mat-label>
+            <input matInput 
+                   name="nombre"
+                   [(ngModel)]="pacient.nombre"
+                   required
+            >
+        </mat-form-field>
+    
+        <mat-form-field>
+            <mat-label>DNI</mat-label>
+            <input matInput 
+                   name="id"
+                   [(ngModel)]="pacient.id"
+                   required
+            >
+        </mat-form-field>
+    
+        <mat-form-field>
+            <mat-label>Fecha de nacimiento</mat-label>
+            <input matInput [matDatepicker]="nacimientoPicker" [max]="maxDate" name="nacimiento" [(ngModel)]="nacimiento" (dateChange)="checkFechaDeNacimiento()" required>
+            <mat-datepicker-toggle matSuffix [for]="nacimientoPicker"></mat-datepicker-toggle>
+            <mat-datepicker #nacimientoPicker 
+                             ouchUi 
+                             startView="multi-year"
+                             (yearSelected)="chosenYearHandler($event)"
+                             (monthSelected)="chosenMonthHandler($event)"  
+
+                             >
+            </mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Mutual</mat-label>
+            <mat-select name="obra_social" [(ngModel)]="pacient.obra_social" required>
+                <mat-option *ngFor="let mutual of mutuales" [(value)]="mutual.nombre">{{mutual.nombre}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="pacient.obra_social !== 'Particular' || pacient.numero_de_afiliado">
+            <mat-label>Número de Afiliado</mat-label>
+            <input matInput name="numero_de_afiliado" [(ngModel)]="pacient.numero_de_afiliado" autocomplete="off" required>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="pacient.telefono">
+            <mat-label>Teléfono</mat-label>
+            <input matInput 
+                   name="teléfono"
+                   [(ngModel)]="pacient.telefono"
+            >
+        </mat-form-field>
+    
+    </form>
+
+    <button (click)="saveChanges()"
+             mat-raised-button 
+             color="warn" 
+             style="width: 100%; margin: 0 auto;"
+             [disabled]="!pacientForm.valid"
+             type="button" 
+    >        Guardar Cambios
+    </button>
+
+</div>

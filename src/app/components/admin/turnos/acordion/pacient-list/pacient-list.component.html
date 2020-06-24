@@ -1,0 +1,16 @@
+
+<mat-expansion-panel hiddeToggle="true" expanded="false">
+    
+    <mat-expansion-panel-header>Pacientes</mat-expansion-panel-header>
+    <mat-form-field style="width: 100%;">
+        <mat-label>Filtrar por Apellido</mat-label>
+        <input matInput (keyup)="applyFilter($event)" style="width: 100%;">
+    </mat-form-field>
+    
+    <mat-list>
+        <mat-list-item (click)="openPacientTable(paciente.id)" *ngFor="let paciente of pacientList"  style="cursor: pointer;">
+            <h3  matLine>{{ paciente.apellido }} {{ paciente.nombre }}</h3>
+        </mat-list-item>
+    </mat-list>
+    <span (click)="loadMorePacients()" class="ver_mas" *ngIf="count < pacientsCounter">Cargar más...</span>
+</mat-expansion-panel>

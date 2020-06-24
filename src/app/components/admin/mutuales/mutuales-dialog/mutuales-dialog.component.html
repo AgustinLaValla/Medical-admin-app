@@ -1,0 +1,38 @@
+<div *ngIf=" (data.message == 'Editar Mutual' || data.message == 'Agregar Mutual') && !loading ">
+
+    <h3 mat-dialog-title>{{ data.message }}</h3>
+
+    <mat-dialog-content>
+
+        <div>
+            
+            <form>
+                <div class="input-container">
+                    <mat-form-field style="width: 500px;">
+                        <input matInput 
+                               placeholder="Nombre de la mutual" 
+                               name="nombreMutual"
+                               [(ngModel)]="mutual.nombre"
+                        >
+                    </mat-form-field>
+
+                    <button *ngIf="data.message === 'Agregar Mutual'" (click)="addMutual()" mat-raised-button class="add_btn">
+                        <mat-icon>add</mat-icon>Agregar
+                    </button>
+                    <button *ngIf="data.message === 'Editar Mutual'" (click)="updateMutual()" mat-raised-button class="add_btn">
+                        <mat-icon>update</mat-icon>Update
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </mat-dialog-content>
+
+</div>
+
+
+
+<mat-spinner *ngIf="loading">
+</mat-spinner>
