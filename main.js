@@ -9,7 +9,7 @@ app.on('ready', () => {
         width: 1400,
         height: 1000,
         frame:false,
-        icon:path.join(__dirname, 'dist', 'consultorio-ayacucho-app', 'assets', 'img', 'icon.ico'),
+        icon:path.join(__dirname, 'assets', 'icon.ico'),
         resizable: false
     });
 

@@ -190,7 +190,7 @@ export class StatisticsComponent implements OnDestroy {
         alignment: 'center',
       };
     });
-    pdf.create().open();
+    pdf.create().download();
   };
 
   generateColumnsData(pdf: PdfMakeWrapper, includeDiagnoses: true | undefined) {
